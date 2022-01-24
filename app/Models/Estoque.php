@@ -13,4 +13,8 @@ class Estoque extends Model
     {
         return $this->belongsTo(Pedido::class, 'produtoId');
     }
+    public function reserva()
+    {
+        return $this->belongsTo(Reserva::class, 'produtoId');
+    }
 }

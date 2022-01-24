@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reserva;
+use App\Models\Estoque;
 
 
 class ReservaServer extends Controller
@@ -37,6 +38,22 @@ class ReservaServer extends Controller
     public function store(Request $request)
     {
         try {
+
+            $estoqueAtual = Estoque::find($request->reserva['produtoId']);
+
+            $reservas = Reserva::where('produtoId',$request->reserva['produtoId'])
+            ->select('reservaqtd')->get();
+
+            $totalReserva = $request->reserva['reserva'];
+
+            foreach ($reservas as $reserva) {
+                $totalReserva += $reserva->reservaqtd;
+            }
+
+            if($estoqueAtual->estoqueqtd < $totalReserva){
+                throw new \Exception("Total do estoque menor que a reserva atual.", 1);
+            } 
+
             $reserva = new Reserva;
                 
             $reserva->produtoId = $request->reserva['produtoId'];
@@ -45,10 +62,9 @@ class ReservaServer extends Controller
             $reserva->save();
 
             return ("Produto reservado com sucesso. Produto ID: ".$request->reserva['produtoId'].
-        ". Reserva: ".$request->reserva['reserva']);
+                ". Reserva: ".$request->reserva['reserva']);
         } catch (\Exception $e) {
-            return getMessage();
-            //throw $th;
+            return $e->getMessage();
         }
 
     }
