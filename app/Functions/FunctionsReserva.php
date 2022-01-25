@@ -11,7 +11,7 @@ class FunctionsReserva
      * Retorna o total reservado do produto
      * 
      */
-    public static function getTotalReserva($produtoId, $reserva = 0)
+    public static function getTotalReserva($produtoId, $reserva = 0) : int
     {
         $reservas = Reserva::where('produtoId', $produtoId)
             ->select('reservaqtd')->get();

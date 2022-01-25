@@ -11,7 +11,7 @@ class FunctionsEstoque
      * Retorna o estoque atual
      * 
      */
-    public static function getEstoqueAtual($produtoId)
+    public static function getEstoqueAtual($produtoId) : int
     {
         $estoqueAtual = Estoque::find($produtoId);
 
