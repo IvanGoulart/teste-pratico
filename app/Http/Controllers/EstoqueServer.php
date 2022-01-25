@@ -6,7 +6,6 @@ use App\Models\Estoque;
 use App\Functions\FunctionsEstoque;
 use App\Functions\FunctionsReserva;
 use App\Models\Reserva;
-use App\Repositories\RepositoryEstoqueInterface;
 use Illuminate\Http\Request;
 
 class EstoqueServer extends Controller
