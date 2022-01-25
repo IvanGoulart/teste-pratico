@@ -18,3 +18,6 @@ Route::get('/', function () {
 Route::post('/', [EstoqueServer::class, 'update']);
 
 Route::post('/reservar', [ReservaServer::class, 'store']);
+
+Route::get('/finalizar', [ReservaServer::class, 'finalizar']);
+
