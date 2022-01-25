@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Reserva;
-use App\Models\Estoque;
 use App\Functions\FunctionsEstoque;
 use App\Functions\FunctionsReserva;
 
@@ -40,10 +39,13 @@ class ReservaServer extends Controller
     {
         try {
 
+            FunctionsEstoque::validaPedido($request->reserva['numero_do_pedido']);
+            FunctionsEstoque::validaProduto($request->reserva['produtoId'], $request->reserva['numero_do_pedido']);
+
             $estoqueAtual = FunctionsEstoque::getEstoqueAtual($request->reserva['produtoId']);
             $totalReserva = FunctionsReserva::getTotalReserva($request->reserva['produtoId'], $request->reserva['reserva']);
 
-            if ($estoqueAtual->estoqueqtd < $totalReserva) {
+            if ($estoqueAtual < $totalReserva) {
                 throw new \Exception("Total do estoque menor que a reserva atual.", 1);
             }
 
@@ -51,25 +53,16 @@ class ReservaServer extends Controller
 
             $reserva->produtoId = $request->reserva['produtoId'];
             $reserva->reservaqtd = $request->reserva['reserva'];
+            $reserva->numero_do_pedido = $request->reserva['numero_do_pedido'];
 
             $reserva->save();
 
-            return ("Produto reservado com sucesso. Produto ID: " . $request->reserva['produtoId'] .
+            return ("Produto reservado com sucesso." . " Pedido: " . $request->reserva['numero_do_pedido'] . " Produto ID: " . $request->reserva['produtoId'] .
                 ". Reserva: " . $request->reserva['reserva']);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
-
-
-    /**
-     * 
-     * 
-     */
-    public function finalizar()
-    {
-    }
-
 
     /**
      * Display the specified resource.

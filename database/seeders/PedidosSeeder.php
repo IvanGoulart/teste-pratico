@@ -19,8 +19,9 @@ class PedidosSeeder extends Seeder
 
         foreach ($estoques as $estoque) {
             DB::table('pedidos')->insert([
+                'numero_do_pedido' => 5,
                 'produtoId' => $estoque->id,
-                'qtd' => $estoque->estoqueqtd,
+                'qtd' => $estoque->estoqueqtd - 10,
                 'created_at' => now()
             ]);
         }

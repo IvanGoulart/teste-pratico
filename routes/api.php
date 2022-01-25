@@ -12,12 +12,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/', function () {
-    return Pedido::with('estoque')->get();
+    return Pedido::all();
 });
 
-Route::post('/', [EstoqueServer::class, 'update']);
+Route::post('/finalizar', [EstoqueServer::class, 'finalizar']);
 
 Route::post('/reservar', [ReservaServer::class, 'store']);
 
-Route::get('/finalizar', [ReservaServer::class, 'finalizar']);
 
