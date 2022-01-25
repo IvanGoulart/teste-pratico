@@ -12,7 +12,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/', function () {
-    return Pedido::all();
+    return Pedido::with('itens')->get();
 });
 
 Route::post('/finalizar', [EstoqueServer::class, 'finalizar']);

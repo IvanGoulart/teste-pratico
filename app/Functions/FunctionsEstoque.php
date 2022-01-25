@@ -41,8 +41,10 @@ class FunctionsEstoque
      */
     public static function validaProduto($produtoId, $numero_do_pedido)
     {
-        $validaProduto = Pedido::where('numero_do_pedido', $numero_do_pedido)
-            ->where('produtoId', $produtoId)->first();
+
+        $validaProduto = Pedido::with('itens')->whereHas('itens', function ($query) use ($produtoId, $numero_do_pedido) {
+            $query->where('produtoId', $produtoId);
+        })->where('numero_do_pedido', $numero_do_pedido)->first();
 
         if (empty($validaProduto)) {
             throw new \Exception("Produto " . $produtoId . " não encontrado para o pedido: " . $numero_do_pedido, 1);

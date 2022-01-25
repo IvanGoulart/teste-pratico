@@ -46,7 +46,8 @@ class ReservaServer extends Controller
             $totalReserva = FunctionsReserva::getTotalReserva($request->reserva['produtoId'], $request->reserva['reserva']);
 
             if ($estoqueAtual < $totalReserva) {
-                throw new \Exception("Total do estoque menor que a reserva atual.", 1);
+                throw new \Exception("Total do estoque menor que a reserva atual. Reservados: " . $totalReserva
+                . " estoque: ". $estoqueAtual, 1);
             }
 
             $reserva = new Reserva;

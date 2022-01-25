@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddNumeroDoPedidoToUsersTable extends Migration
+class CreatePedidoItensTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class AddNumeroDoPedidoToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('pedidos', function (Blueprint $table) {
+        Schema::create('pedido_itens', function (Blueprint $table) {
+            $table->id();
             $table->integer('numero_do_pedido');
+            $table->integer('produtoId');
+            $table->integer('qtd');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ class AddNumeroDoPedidoToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('pedidos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('pedido_itens');
     }
 }
