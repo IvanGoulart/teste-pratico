@@ -5,31 +5,33 @@
 - php artisan migrate
 - php artisan db:seed --class=EstoquesSeeder
 - php artisan db:seed --class=PedidosSeeder
+- php artisan serve
 
 ## Informações
+Os comandos:
+
+- php artisan db:seed --class=EstoquesSeeder
+- php artisan db:seed --class=PedidosSeeder
+
+cria um estoque e um pedido para facilitar o teste da apis.
+
+Temos as seguintes apis: 
+- localhost:8000/api/pedidos
+Traz os pedidos e seus itens
+
+-localhost:8000/api/reservar
+Esta api recebe o pedido e a quantidade de itens serão reservados.
+
+-localhost:8000/api/finalizar
+Esta api da a baixa no estoque.
 
 
-## Laravel Sponsors
+## Validações
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+O projetos tem algumas validações:
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-- **[Romega Software](https://romegasoftware.com)**
+-Caso tente reservar um produto que não existe para o pedido, é retornado uma mensagem: Produto 999999 não existe para o pedido 10.
+-Caso as reservas ultrapassem o estoque atual, retorna a mensagem: Total de estoque menor que a reserva. Reservados 99999 estoque 50.
 
 ## Contributing
 
