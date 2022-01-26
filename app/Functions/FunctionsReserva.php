@@ -25,9 +25,9 @@ class FunctionsReserva
         return $totalReserva;
     }
 
-    public static function atualizaEstoque($produtoId, $numero_do_pedido)
+    public static function atualizaEstoque($produtoId)
     {
-        Reserva::where('produtoId', $produtoId)->where('numero_do_pedido', $numero_do_pedido)
+        Reserva::where('produtoId', $produtoId)
             ->update(['baixa_no_estoque' => true]);
     }
 }

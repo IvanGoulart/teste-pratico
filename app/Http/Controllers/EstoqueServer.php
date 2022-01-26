@@ -20,14 +20,13 @@ class EstoqueServer extends Controller
     public function finalizar(Request $request)
     {
 
-        dd($request->pedidos);
-
         $produtosReservados = Reserva::select('produtoId')
             ->where('baixa_no_estoque', false)
             ->groupBy('produtoId')->get();
 
         try {
             foreach ($produtosReservados as $reserva) {
+
                 $totalReserva = FunctionsReserva::getTotalReserva($reserva->produtoId);
                 $buscaEstoque = FunctionsEstoque::getEstoqueAtual($reserva->produtoId);
 
@@ -37,7 +36,7 @@ class EstoqueServer extends Controller
                 FunctionsReserva::atualizaEstoque($reserva->produtoId, $request->numero_do_pedido);
             }
 
-            return "Estoque atualizado com sucesso para as reservas do pedido: " . $request->numero_do_pedido;
+            return "Estoque atualizado com sucesso!!";
         } catch (\Exception $e) {
             return $e->getMessage();
         }
