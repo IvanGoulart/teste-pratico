@@ -20,33 +20,37 @@ class ReservaServer extends Controller
     {
         try {
 
-            /**
-             * Validação de pedido
-             */
-            FunctionsEstoque::validaPedido($request->reserva['numero_do_pedido']);
-            /**
-             * validação de produtos
-             */
-            FunctionsEstoque::validaProduto($request->reserva['produtoId'], $request->reserva['numero_do_pedido']);
+            foreach ($request->reserva as $reserva) {
 
-            $estoqueAtual = FunctionsEstoque::getEstoqueAtual($request->reserva['produtoId']);
-            $totalReserva = FunctionsReserva::getTotalReserva($request->reserva['produtoId'], $request->reserva['reserva']);
+                /**
+                 * Validação de pedido
+                 */
+                FunctionsEstoque::validaPedido($reserva['numero_do_pedido']);
+                /**
+                 * validação de produtos
+                 */
+                FunctionsEstoque::validaProduto($reserva['produtoId'], $reserva['numero_do_pedido']);
 
-            if ($estoqueAtual < $totalReserva) {
-                throw new \Exception("Total do estoque menor que a reserva atual. Reservados: " . $totalReserva
-                    . " estoque: " . $estoqueAtual, 1);
+                $estoqueAtual = FunctionsEstoque::getEstoqueAtual($reserva['produtoId']);
+
+                $totalReserva = FunctionsReserva::getTotalReserva($reserva['produtoId'], $reserva['reserva']);
+
+                if ($estoqueAtual < $totalReserva) {
+                    throw new \Exception("Total do estoque menor que a reserva atual. Reservados: " . $totalReserva
+                        . " estoque: " . $estoqueAtual, 1);
+                }
+
+                $criarReserva = new Reserva;
+
+                $criarReserva->produtoId = $reserva['produtoId'];
+                $criarReserva->reservaqtd = $reserva['reserva'];
+                $criarReserva->numero_do_pedido = $reserva['numero_do_pedido'];
+
+                $criarReserva->save();
             }
 
-            $reserva = new Reserva;
 
-            $reserva->produtoId = $request->reserva['produtoId'];
-            $reserva->reservaqtd = $request->reserva['reserva'];
-            $reserva->numero_do_pedido = $request->reserva['numero_do_pedido'];
-
-            $reserva->save();
-
-            return ("Produto reservado com sucesso." . " Pedido: " . $request->reserva['numero_do_pedido'] . " Produto ID: " . $request->reserva['produtoId'] .
-                ". Reserva: " . $request->reserva['reserva']);
+            return ("Produto reservado com sucesso.");
         } catch (\Exception $e) {
             return $e->getMessage();
         }

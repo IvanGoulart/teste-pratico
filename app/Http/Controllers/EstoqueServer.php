@@ -20,13 +20,14 @@ class EstoqueServer extends Controller
     public function finalizar(Request $request)
     {
 
+        dd($request->pedidos);
+
         $produtosReservados = Reserva::select('produtoId')
             ->where('baixa_no_estoque', false)
             ->groupBy('produtoId')->get();
 
         try {
             foreach ($produtosReservados as $reserva) {
-
                 $totalReserva = FunctionsReserva::getTotalReserva($reserva->produtoId);
                 $buscaEstoque = FunctionsEstoque::getEstoqueAtual($reserva->produtoId);
 
