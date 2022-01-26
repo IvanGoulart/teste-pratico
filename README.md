@@ -17,6 +17,8 @@ Os comandos:
 
 cria um estoque e um pedido para facilitar o teste da apis.
 
+## Considerando que esta rodando na porta padrao 8000
+
 Temos as seguintes apis: 
 - localhost:8000/api/pedidos
 
