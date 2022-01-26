@@ -32,7 +32,8 @@ O projetos tem algumas validações:
 
 - Caso tente reservar um produto que não existe para o pedido, é retornado uma mensagem: Produto 999999 não existe para o pedido 10.
 - Caso as reservas ultrapassem o estoque atual, retorna a mensagem: Total de estoque menor que a reserva. Reservados 99999 estoque 50.
-- Caso envie um pedido que não existe no momente da reserva: Pedido 46545 não encontado
+- Caso envie um pedido que não existe no momente da reserva: Pedido 46545 não encontado.
+- Caso passe nas validações retorna mensagem de sucesso.
 
 ## Contributing
 
