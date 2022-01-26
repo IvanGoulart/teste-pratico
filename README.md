@@ -1,5 +1,5 @@
 ## Instalação
-
+- git clone
 - criar arquivo .env
 - Composer install
 - php artisan migrate
