@@ -40,7 +40,6 @@ Esta api recebe o pedido e a quantidade de itens serão reservados. POST
 		"produtoId": 3,
 		"reserva": 10
 		}
-
 	]
 }
 
