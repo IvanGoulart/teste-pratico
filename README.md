@@ -17,10 +17,31 @@ cria um estoque e um pedido para facilitar o teste da apis.
 
 Temos as seguintes apis: 
 - localhost:8000/api/pedidos
-Traz os pedidos e seus itens
+Traz os pedidos e seus itens. GET
 
 - localhost:8000/api/reservar
-Esta api recebe o pedido e a quantidade de itens serão reservados.
+Esta api recebe o pedido e a quantidade de itens serão reservados. POST
+{
+	"reserva":
+	[
+		{
+		"numero_do_pedido" : 1054366,
+		"produtoId": 2,
+		"reserva": 500
+		},
+		{
+		"numero_do_pedido" : 5,
+		"produtoId": 5,
+		"reserva": 1
+		},
+				{
+		"numero_do_pedido" : 10,
+		"produtoId": 3,
+		"reserva": 10
+		}
+
+	]
+}
 
 - localhost:8000/api/finalizar
 Esta api da a baixa no estoque.
