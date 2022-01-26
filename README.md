@@ -50,7 +50,7 @@ Esta api recebe o pedido e a quantidade de itens serão reservados. POST
 }
 
 - localhost:8000/api/finalizar
-- 
+
 Esta api faz a baixa no estoque.
 
 
