@@ -1,6 +1,7 @@
 ## Instalação
 - git clone
 - criar arquivo .env
+- cp .env.example .env (linux)
 - Composer install
 - php artisan migrate
 - php artisan db:seed --class=EstoquesSeeder
