@@ -3,6 +3,7 @@
 - criar arquivo .env
 - cp .env.example .env (linux)
 - Composer install
+- configurar o DB no arquivo .env
 - php artisan migrate
 - php artisan db:seed --class=EstoquesSeeder
 - php artisan db:seed --class=PedidosSeeder
