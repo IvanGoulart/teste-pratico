@@ -17,9 +17,11 @@ cria um estoque e um pedido para facilitar o teste da apis.
 
 Temos as seguintes apis: 
 - localhost:8000/api/pedidos
+
 Traz os pedidos e seus itens. GET
 
 - localhost:8000/api/reservar
+
 Esta api recebe o pedido e a quantidade de itens serão reservados. POST
 
 {
