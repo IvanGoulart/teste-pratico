@@ -19,10 +19,10 @@ Temos as seguintes apis:
 - localhost:8000/api/pedidos
 Traz os pedidos e seus itens
 
--localhost:8000/api/reservar
+- localhost:8000/api/reservar
 Esta api recebe o pedido e a quantidade de itens serão reservados.
 
--localhost:8000/api/finalizar
+- localhost:8000/api/finalizar
 Esta api da a baixa no estoque.
 
 
@@ -30,8 +30,9 @@ Esta api da a baixa no estoque.
 
 O projetos tem algumas validações:
 
--Caso tente reservar um produto que não existe para o pedido, é retornado uma mensagem: Produto 999999 não existe para o pedido 10.
--Caso as reservas ultrapassem o estoque atual, retorna a mensagem: Total de estoque menor que a reserva. Reservados 99999 estoque 50.
+- Caso tente reservar um produto que não existe para o pedido, é retornado uma mensagem: Produto 999999 não existe para o pedido 10.
+- Caso as reservas ultrapassem o estoque atual, retorna a mensagem: Total de estoque menor que a reserva. Reservados 99999 estoque 50.
+- Caso envie um pedido que não existe no momente da reserva: Pedido 46545 não encontado
 
 ## Contributing
 
